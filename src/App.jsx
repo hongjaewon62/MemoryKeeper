@@ -1,12 +1,19 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react"
+import styled, {createGlobalStyle } from "styled-components"
+import GlobalStyle from "../src/style/GlobalStyle.jsx";
+import Header from "./header/header.jsx";
+
+const Wrapper = styled.div`
+  background: linear-gradient(#FFFFFF, #DDF0FF);
+  height: 100%;
+  width: 100%;
+`
 
 function App() {
   return (
     <>
-      <h1>시작</h1>
+      <GlobalStyle />
+      <Header />
     </>
   )
 }
