@@ -30,7 +30,7 @@ const LogoTitle = styled.div`
 const LogoImg = styled.img`
     display: flex;
     width: clamp(30px, 4vw, 50px);
-    height: clamp(30px, 4vw, 50px)
+    height: clamp(30px, 4vw, 50px);
 `
 
 const LoginWrapper = styled.div`
@@ -40,14 +40,14 @@ const LoginWrapper = styled.div`
     background: #72BBEE;
     border-radius: 100px;
     width: clamp(40px, 10vw, 160px);
-    height: clamp(10px, 2.5vh, 40px);
+    height: clamp(20px, 2.8vh, 40px);
     margin-right: clamp(5px, 4vw, 20px);
     cursor: pointer;
 `
 
 const LoginTitle = styled.span`
     color: white;
-    font-size: clamp(0.5vw, 1.0vw, 1.1vw);
+    font-size: clamp(0.5vw, 1.05vw, 1.1vw);
     font-weight: 500;
 `
 
@@ -56,7 +56,7 @@ function Header() {
         <Wrapper>
             <LogoWrapper>
                 <LogoImg src="img/logo.PNG" />
-                <LogoTitle>기억 지킴이</LogoTitle>
+                <LogoTitle>기억지킴이</LogoTitle>
             </LogoWrapper>
             <NavBar />
             <LoginWrapper>

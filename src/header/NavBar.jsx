@@ -7,8 +7,8 @@ const Wrapper = styled.div`
 `
 
 const NavBarTitle = styled.div`
-    font-size: clamp(10px, 2vw, 24px);
-    padding: 0 clamp(10px, 3vw, 50px);
+    font-size: clamp(9px, 2vw, 24px);
+    padding: 0 clamp(8px, 3vw, 80px);
     cursor: pointer;
 `
 
