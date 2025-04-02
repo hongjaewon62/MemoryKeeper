@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import NavBar from "./NavBar";
+import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled.div`
     display: flex;
@@ -52,15 +53,21 @@ const LoginTitle = styled.span`
 `
 
 function Header() {
+    const navigate = useNavigate();
+
     return (
         <Wrapper>
-            <LogoWrapper>
+            <LogoWrapper onClick={() => {
+                navigate("/")
+            }}>
                 <LogoImg src="img/logo.PNG" />
                 <LogoTitle>기억지킴이</LogoTitle>
             </LogoWrapper>
             <NavBar />
             <LoginWrapper>
-                <LoginTitle>
+                <LoginTitle onClick={() => {
+                    navigate("/login")
+                }}>
                     로그인 / 회원가입
                 </LoginTitle>
             </LoginWrapper>
