@@ -4,6 +4,7 @@ import GlobalStyle from "../src/style/GlobalStyle.jsx";
 import Header from "./header/header.jsx";
 import Home from "./main/home.jsx";
 import Login from "./Login/Login.jsx";
+import SignUp from "./login/SignUp.jsx";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route index element={<Home />}/>
         <Route path="login" element={<Login />} />
+        <Route path="signUp" element={<SignUp />} />
       </Routes>
     </BrowserRouter>
   )
