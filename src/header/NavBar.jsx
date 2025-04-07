@@ -16,7 +16,7 @@ function NavBar()
 {
     return(
         <Wrapper>
-            <NavBarTitle>통계</NavBarTitle>
+            <NavBarTitle>정보</NavBarTitle>
             <NavBarTitle>센터</NavBarTitle>
             <NavBarTitle>기억나눔터</NavBarTitle>
             <NavBarTitle>마음소리</NavBarTitle>
