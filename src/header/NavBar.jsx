@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import DropDownMenu from "./DropDownMenu";
+import { useState } from "react";
 
 const Wrapper = styled.div`
     display: flex;
@@ -12,15 +14,14 @@ const NavBarTitle = styled.div`
     cursor: pointer;
 `
 
-function NavBar()
-{
+function NavBar({onToggle}) {
     return(
         <Wrapper>
-            <NavBarTitle>정보</NavBarTitle>
-            <NavBarTitle>센터</NavBarTitle>
-            <NavBarTitle>기억나눔터</NavBarTitle>
-            <NavBarTitle>마음소리</NavBarTitle>
-            <NavBarTitle>기억톡톡</NavBarTitle> 
+            <NavBarTitle onClick={onToggle}>정보</NavBarTitle>
+            <NavBarTitle onClick={onToggle}>센터</NavBarTitle>
+            <NavBarTitle onClick={onToggle}>기억나눔터</NavBarTitle>
+            <NavBarTitle onClick={onToggle}>마음소리</NavBarTitle>
+            <NavBarTitle onClick={onToggle}>기억톡톡</NavBarTitle> 
         </Wrapper>
     )
 }

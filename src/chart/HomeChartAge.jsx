@@ -42,7 +42,7 @@ const HomeChartAge = () => {
               },
               total: {
                 show: true,
-                label: "연령도별",
+                label: "연령별",
                 fontSize: "clamp(10px, 1.5vw, 18px)",
                 fontWeight: "bold",
                 color: "#000000",

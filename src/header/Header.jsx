@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import NavBar from "./NavBar";
 import { useNavigate } from "react-router-dom";
+import DropDownMenu from "./DropDownMenu";
+import { useState } from "react";
 
 const Wrapper = styled.div`
     display: flex;
@@ -54,24 +56,32 @@ const LoginTitle = styled.span`
 
 function Header() {
     const navigate = useNavigate();
+    const [isOpen, setIsOpen] = useState(false);
+
+    const handleTogle = () => {
+        setIsOpen((prev) => !prev);
+    }
 
     return (
-        <Wrapper>
-            <LogoWrapper onClick={() => {
-                navigate("/")
-            }}>
-                <LogoImg src="img/logo.PNG" />
-                <LogoTitle>기억지킴이</LogoTitle>
-            </LogoWrapper>
-            <NavBar />
-            <LoginWrapper>
-                <LoginTitle onClick={() => {
-                    navigate("/login")
+        <>
+            <Wrapper>
+                <LogoWrapper onClick={() => {
+                    navigate("/")
                 }}>
-                    로그인 / 회원가입
-                </LoginTitle>
-            </LoginWrapper>
-        </Wrapper>
+                    <LogoImg src="img/logo.PNG" />
+                    <LogoTitle>기억지킴이</LogoTitle>
+                </LogoWrapper>
+                <NavBar onToggle={handleTogle}/>
+                <LoginWrapper>
+                    <LoginTitle onClick={() => {
+                        navigate("/login")
+                    }}>
+                        로그인 / 회원가입
+                    </LoginTitle>
+                </LoginWrapper>
+            </Wrapper>
+            {isOpen && <DropDownMenu />}
+        </>
     )
 }
 
