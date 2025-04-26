@@ -54,6 +54,18 @@ const Content = styled.div`
 `
 
 function Home() {
+    // const [hello, setHello] = useState('');
+
+    // useEffect(() => {
+    //     axios.get("/api/test")
+    //     .then((res) => {
+    //         console.log("응답 데이터:", res.data);
+    //         setHello(res.data);
+    //     }).catch((err) => {
+    //         console.error("요청 실패:", err);
+    //     });
+    // }, []);
+
     return (
         <Wrapper>
             <TitleWrapper>
@@ -61,13 +73,13 @@ function Home() {
             </TitleWrapper>
             <ChartWrapper>
                 <ChartContainer>
-                    <HomeChartGender />
+                    <HomeChartGender chartCode="gender-donut" />
                 </ChartContainer>
                 <ChartContainer>
-                    <HomeChartAge />
+                    <HomeChartAge chartCode="age-donut"/>
                 </ChartContainer>
                 <ChartContainer>
-                    <HomeChartSeverity />
+                    <HomeChartSeverity chartCode="severity-donut"/>
                 </ChartContainer>
             </ChartWrapper>
             <TitleWrapper>

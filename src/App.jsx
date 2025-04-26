@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 import GlobalStyle from "../src/style/GlobalStyle.jsx";
 import Header from "./header/header.jsx";
 import Home from "./main/home.jsx";
@@ -13,6 +12,7 @@ function App() {
       <Header />
       <Routes>
         <Route index element={<Home />}/>
+        <Route path="home" element={<Home />} />
         <Route path="login" element={<Login />} />
         <Route path="signUp" element={<SignUp />} />
       </Routes>

@@ -7,6 +7,7 @@ const Wrapper = styled.div`
     align-items: start;
     background: #f6f6f6;
     width: 100%;
+    z-index: 2;
 `
 
 const HeaderContentWrapper = styled.div`
