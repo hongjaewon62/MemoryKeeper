@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import NavBar from "./NavBar";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import DropDownMenu from "./DropDownMenu";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Wrapper = styled.div`
     display: flex;
@@ -56,7 +56,12 @@ const LoginTitle = styled.span`
 
 function Header() {
     const navigate = useNavigate();
+    const location = useLocation();
     const [isOpen, setIsOpen] = useState(false);
+
+    useEffect(() => {
+        setIsOpen(false);
+    }, [location.pathname]);
 
     const handleTogle = () => {
         setIsOpen((prev) => !prev);

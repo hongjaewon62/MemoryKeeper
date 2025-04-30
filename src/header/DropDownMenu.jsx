@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -28,17 +29,21 @@ const HeaderContentTitle = styled.div`
     &:hover {
     background: #DDDDDD;
     border-radius: 8px;
+    user-select : none;
   }
 `
 
 function DropDownMenu() {
+    const navigate = useNavigate();
     return(
         <Wrapper>
             <HeaderContentWrapper>
                 <HeaderContentTitle>
                     치매 정보 
                 </HeaderContentTitle>
-                <HeaderContentTitle>
+                <HeaderContentTitle onClick={() => {
+                    navigate("/statistics")
+                }}>
                     치매 통계
                 </HeaderContentTitle>
             </HeaderContentWrapper>

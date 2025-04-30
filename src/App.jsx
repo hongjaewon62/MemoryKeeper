@@ -4,6 +4,7 @@ import Header from "./header/header.jsx";
 import Home from "./main/home.jsx";
 import Login from "./Login/Login.jsx";
 import SignUp from "./login/SignUp.jsx";
+import Statistics from "./information/Statistics.jsx"
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="home" element={<Home />} />
         <Route path="login" element={<Login />} />
         <Route path="signUp" element={<SignUp />} />
+        <Route path="statistics" element={<Statistics />} />
       </Routes>
     </BrowserRouter>
   )

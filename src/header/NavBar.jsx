@@ -10,6 +10,7 @@ const NavBarTitle = styled.div`
     font-size: clamp(9px, 2vw, 24px);
     padding: 0 clamp(8px, 3vw, 80px);
     cursor: pointer;
+    user-select: none;
 `
 
 function NavBar({onToggle}) {
