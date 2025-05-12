@@ -1,4 +1,5 @@
-// src/components/DementiaTrendsChart.jsx
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import styled from 'styled-components';
 
@@ -11,42 +12,112 @@ const Wrapper = styled.div`
   margin-top: 10vh;
 `;
 
-const InformationStatistics = () => {
-  // 예시 데이터
-  const data = {
-    years: ['2015', '2016', '2017','2018', '2019', '2020', '2021', '2022', '2023', '2024'],
-    patientCounts: [9267667, 9746591, 10242206, 10765609, 11320069, 11939384, 12575642, 13153957, 13652453, 14132874],
-  };
+const chartFieldMap = {
+  "dementia-line": "dementia_patients",
+  "dementia-female-line": "dementia_patients",
+  "dementia-male-line": "dementia_patients",
+  "population-line": "population",
+  "population-female-line": "population",
+  "population-male-line": "population",
+  "prevalence-line": "prevalence_rate",
+  "prevalence-female-line": "prevalence_rat",
+  "prevalence-male-line": "prevalence_rat",
+  "mild-cases-line": "mild_cases",
+  "mild-cases-female-line": "mild_cases",
+  "mild-cases-male-line": "mild_cases",
+  "moderate-cases-line": "moderate_cases",
+  "moderate-cases-female-line": "moderate_cases",
+  "moderate-cases-male-line": "moderate_cases",
+  "severe-cases-line": "severe_cases",
+  "severe-cases-female-line": "severe_cases",
+  "severe-cases-male-line": "severe_cases",
+  "mci-patients-line": "mci_patients",
+  "mci-patients-female-line": "mci_patients",
+  "mci-patients-male-line": "mci_patients",
+  "mci-prevalence-line": "mci_prevalence_rate",
+  "mci-prevalence-female-line": "mci_prevalence_rate",
+  "mci-prevalence-male-line": "mci_prevalence_rate"
+};
+
+const InformationStatistics = ({
+  year = "2024",
+  si = "전국",
+  sigungu = "전국",
+  gender = "전체",
+  chartCode = "dementia-line", 
+  chartTitle = "치매 환자 수"
+  }) => {
+  const [chartData, setChartData] = useState([]);
+  const [ageGroups, setAgeGroups] = useState([]);
+  const targetField = chartFieldMap[chartCode];
+
+  const isRateChart = targetField?.includes("prevalence");
+
+  useEffect(() => {
+    if(year) {
+      fetchChartData();
+    }
+  }, [year, si, sigungu, gender, chartTitle]);
+
+  const fetchChartData = async() => {
+    try {
+      const response = await axios.get("/api/statistics/search", {
+        params: {year, si, sigungu, gender, chartTitle},
+      });
+      const result = response.data;
+      if (!targetField) {
+        console.error(`매핑되지 않은 chartCode: ${chartCode}`);
+        return;
+      }
+
+
+      const groups = result.map((item) => item.agegroup);
+      const values = result.map((item) => Number(item[targetField]));
+
+      setAgeGroups(groups);
+      setChartData(values);
+    } catch(error) {
+      console.error("데이터 불러오기 실패: ", error);
+    }
+  }
 
   const chartOptions = {
     chart: {
-      type: 'line',
-      zoom: { enabled: false },
-      toolbar: { show: false },
+      type: "line",
+      zoom: {
+        enabled: false
+      },
+      toolbar: {
+        show: false
+      },
     },
     title: {
-      text: '연도별 치매 환자 수 변화',
-      align: 'center',
+      text: chartTitle || "치매 관련 통계",
+      align: "center",
       style: {
-        fontSize: '20px',
+        fontSize: "20px",
       },
     },
     xaxis: {
-      categories: data.years,
+      categories: ageGroups,
       title: {
-        text: '연도',
+        text: "연령대",
+        style: {
+          fontSize: "clamp(12px, 1.5vw, 16px)",
+        },
       },
     },
     yaxis: {
       title: {
-        text: '치매 환자 수 (명)',
+        text: `${chartTitle} (${isRateChart ? "%" : "명"})`,
+        style: { fontSize: "clamp(10px, 1vw, 12px)" },
       },
       labels: {
-        formatter: (val) => val.toLocaleString(), // 숫자 콤마 표시
+        formatter: (val) =>
+          isRateChart ? `${val.toFixed(2)}%` : val.toLocaleString(),
       },
     },
     stroke: {
-      //curve: 'smooth', // 부드러운 곡선
       width: 3,
     },
     markers: {
@@ -68,14 +139,19 @@ const InformationStatistics = () => {
 
   const chartSeries = [
     {
-      name: '치매 환자 수',
-      data: data.patientCounts,
+      name: chartTitle || "치매 관련 통계",
+      data: chartData,
     },
   ];
 
   return (
     <Wrapper>
-      <ReactApexChart options={chartOptions} series={chartSeries} type="line" width="100%" height="100%" />
+      <ReactApexChart
+        options={chartOptions}
+        series={chartSeries}
+        type="line"
+        width="100%"
+        height="100%" />
     </Wrapper>
   );
 };

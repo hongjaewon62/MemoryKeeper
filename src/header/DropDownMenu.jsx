@@ -48,8 +48,10 @@ function DropDownMenu() {
                 </HeaderContentTitle>
             </HeaderContentWrapper>
             <HeaderContentWrapper>
-                <HeaderContentTitle>
-                    센터 찾기
+                <HeaderContentTitle onClick={() => {
+                    navigate("/center")
+                }}>
+                    시설 찾기
                 </HeaderContentTitle>
             </HeaderContentWrapper>
             <HeaderContentWrapper>

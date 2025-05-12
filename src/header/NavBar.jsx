@@ -17,7 +17,7 @@ function NavBar({onToggle}) {
     return(
         <Wrapper>
             <NavBarTitle onClick={onToggle}>정보</NavBarTitle>
-            <NavBarTitle onClick={onToggle}>센터</NavBarTitle>
+            <NavBarTitle onClick={onToggle}>시설</NavBarTitle>
             <NavBarTitle onClick={onToggle}>기억나눔터</NavBarTitle>
             <NavBarTitle onClick={onToggle}>마음소리</NavBarTitle>
             <NavBarTitle onClick={onToggle}>기억톡톡</NavBarTitle> 
