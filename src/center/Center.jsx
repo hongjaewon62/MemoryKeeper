@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Sigungu } from "../data/Sigungu";
+import Pagination from "react-js-pagination";
+import axios from 'axios';
 
 const Wrapper = styled.div`
     display: flex;
@@ -121,6 +123,7 @@ const CenterWrapper = styled.div`
 const CenterTable = styled.table`
     width: 100%;
     border-collapse: collapse;
+    table-layout: auto; 
 `
 
 const TableHeader = styled.thead`
@@ -132,6 +135,18 @@ const TableHeader = styled.thead`
     text-align: center;
     border-bottom: 1px solid #9fd7ff;
     font-size: clamp(12px, 1vw, 30px);
+  }
+
+    .col-type {
+        width: 20%;
+    }
+
+    .col-name {
+        width: 55%; 
+    }
+
+    .col-phone {
+        width: 25%;
   }
 `;
 
@@ -182,91 +197,121 @@ const CenterAddress = styled.span`
     font-size: clamp(10px, 1.6vh, 20px);
 `
 
+const PaginationWrapper = styled.div`
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+
+  ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    margin: 0 clamp(3px, 1vw, 8px);
+    cursor: pointer;
+    width: clamp(30px, 3vw, 40px);
+    height: clamp(30px, 3vw, 40px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+  }
+
+  li.active {
+    background-color: #72bbee;
+    border-radius: 5px;
+  }
+
+  li.active a {
+    color: #ffffff;
+  }
+
+  a {
+    color: #000000;
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  a:hover {
+    background-color: #72bbee;
+    color: #ffffff;
+    border-radius: 5px;
+  }
+`
+
 function Center() {
     const [selectSi, setSelectSi] = useState("전국");
     const [selectSigungu, setSelectSigungu] = useState("전국");
     const [submit, setSubmit] = useState(false);
 
+    const [centers, setCenters] = useState([]);
+    const [keyword, setKeyword] = useState("");
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
+
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    }
+
     const handleSiChange = (e) => {
             setSelectSi(e.target.value);
-            setSelectSigungu(e.target.value);
-    }
+     }
 
     const getSigunguList = () => {
         const selected = Sigungu.find(item => item.label === selectSi);
         return selected ? selected.options : [];
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setSubmit(true);
-    }
+    const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const data = await fetchCenters(
+        selectSi !== "전국" ? selectSi : "",
+        selectSigungu !== "전국" ? selectSigungu : "",
+        keyword
+    );
+
+    setCenters(data);
+    setCurrentPage(1);
+    };
 
     useEffect(() => {
-        setSubmit(true);
-    })
+    const fetchData = async () => {
+        const data = await fetchCenters("", "", "");
+        setCenters(data);
+    };
+    fetchData();
+    }, []);
 
-    const centers = Array({
-        type: "중앙",
-        name: "중앙치매센터",
-        address: "서울특별시 중구 을지로 245 (을지로 6가 18-79) 국립중앙의료원 중앙치매센터",
-        phone: "166-6-0921",
-        },
-        {
-            type: "광역",
-            name: "서울특별시 광역치매센터",
-            address: "서울시 종로구 대학로 47 이화에수풀 2층",
-            phone: "02-3431-7200",
-        },
-        {
-            type: "광역",
-            name: "부산광역시 광역치매센터",
-            address: "부산광역시 서구 대신공원로 26, 동아대학교병원 센터동 10층",
-            phone: "051-240-2560",
-        },
-        {
-            type: "광역",
-            name: "대구광역시 광역치매센터",
-            address: "대구광역시 북구 호국로 807 칠곡경북대학교병원 2층",
-            phone: "053-323-6321",
-        },
-        {
-            type: "광역",
-            name: "인천광역시 광역치매센터",
-            address: "인천광역시 부평구 동수로 56 가톨릭대학교인천성모병원 제3별관 1층",
-            phone: "032-472-2027",
-        },
-        {
-            type: "광역",
-            name: "광주광역시 광역치매센터",
-            address: "광주 동구 제봉로 27 (학동) 한일빌딩 4층",
-            phone: "062-226-2182",
-        },
-        {
-            type: "광역",
-            name: "대전광역시 광역치매센터",
-            address: "대전광역시 중구 문화로 282 충남대병원 노인보건의료센터 2층",
-            phone: "042-280~8965",
-        },
-        {
-            type: "광역",
-            name: "울산광역시 광역치매센터",
-            address: "울산 중구 태화로 240 (태화동, 동강병원남관) 6층",
-            phone: "052-241-1591",
-        },
-        {
-            type: "광역",
-            name: "세종특별자치시 광역치매센터",
-            address: "세종특별자치시 조치원읍 수원지1길 16",
-            phone: "044-861-8540",
-        },
-        {
-            type: "광역",
-            name: "경기도 광역치매센터",
-            address: "경기도 수원시 장안구 경수대로 1150번지 경기도 인재개발원 내 신관1층",
-            phone: "031-271-7021",
+    const indexOfLast = currentPage * itemsPerPage;
+    const indexOfFirst = indexOfLast - itemsPerPage;
+    const currentItems = centers.slice(indexOfFirst, indexOfLast);
+
+    const fetchCenters = async(si, sigungu, keyword) => {
+    const roadnameaddress = `${si} ${sigungu}`.trim();
+    const validAddress = roadnameaddress !== "" ? roadnameaddress : null;
+    const validName = keyword !== "" ? keyword : null;
+
+        try {
+            const response = await axios.get("/api/centers/search", {
+                params: {
+                    roadnameaddress: validAddress,
+                    name: validName,
+                },
+            });
+            return response.data;
+        } catch (error) {
+            console.error("데이터 불러오기 실패: ", error)
+            return [];
         }
-    )
+    }
 
     return (
         <Wrapper>
@@ -304,39 +349,55 @@ function Center() {
                         </SearchTable>
                         <SearchTable>
                             <SearchTitle>시설 검색</SearchTitle>
-                                <SearchInput type="text" placeholder="시설명을 입력하세요"/>
+                                <SearchInput type="text" placeholder="시설명을 입력하세요" onChange={
+                                    (e) => setKeyword(e.target.value)
+                                }/>
                             <SearchSubmit type="submit" value="검색"/>
                         </SearchTable>
                     </form>
                 </SearchWrapper>
 
-    <CenterWrapper>
-      <CenterTable>
-        <TableHeader>
-          <tr>
-            <th>구분</th>
-            <th>시설명 / 주소</th>
-            <th>전화번호</th>
-          </tr>
-        </TableHeader>
-        <TableBody>
-          {centers.map((center, idx) => (
-            <tr key={idx}>
-              <td><CenterType>{center.type}</CenterType></td>
-              <td>
-                <CenterInfo>
-                  <CenterTitle>{center.name}</CenterTitle>
-                  <CenterAddress>{center.address}</CenterAddress>
-                </CenterInfo>
-              </td>
-              <td>{center.phone}</td>
-            </tr>
-          ))}
-        </TableBody>
-      </CenterTable>
-    </CenterWrapper>
+                <CenterWrapper>
+                    <CenterTable>
+                        <TableHeader>
+                        <tr>
+                            <th className="col-type">구분</th>
+                            <th className="col-name">시설명 / 주소</th>
+                            <th className="col-phone">전화번호</th>
+                        </tr>
+                        </TableHeader>
+                        <TableBody>
+                        {currentItems.map((centers, idx) => (
+                            <tr key={idx}>
+                            <td><CenterType>{centers.type}</CenterType></td>
+                            <td>
+                                <CenterInfo>
+                                <CenterTitle>{centers.name}</CenterTitle>
+                                <CenterAddress>{centers.roadnameaddress ? centers.roadnameaddress : centers.lotnumberaddress}</CenterAddress>
+                                </CenterInfo>
+                            </td>
+                            <td>{centers.phonenumber}</td>
+                            </tr>
+                        ))}
+                        </TableBody>
+                    </CenterTable>
+                </CenterWrapper>
             </ContentWrapper>
-        </Wrapper>
+
+        <PaginationWrapper>
+            <Pagination
+                activePage={currentPage}
+                itemsCountPerPage={itemsPerPage}
+                totalItemsCount={centers.length}
+                pageRangeDisplayed={10}
+                firstPageText={"<<"}
+                lastPageText={">>"}
+                nextPageText={">"}
+                prevPageText={"<"}
+                onChange={handlePageChange}
+            />
+        </PaginationWrapper>
+</Wrapper>
     )
 }
 
