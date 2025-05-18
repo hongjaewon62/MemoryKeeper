@@ -4,38 +4,41 @@ const StyledButton = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: ${(props) => props.width || "100px"};
-    height: ${(props) => props.height || "30px"};
-    margin: ${(props) => props.margin || "none"};
+    width: ${({ $width }) => $width || "100px"};
+    height: ${({ $height }) => $height || "30px"};
+    margin: ${({ $margin }) => $margin || "none"};
 
-    background: ${(props) => props.backgroundColor || "#72BBEE"};
-    color: ${(props) => props.textColor || "#FFFFFF"};
-    
+    background: ${({ $background }) => $background || "#72BBEE"};
+    color: ${({ $textColor }) => $textColor || "#FFFFFF"};
+    border: ${({ $border }) => $border || "none"};
+
     border-radius: 10px;
     font-size: clamp(10px, 1vw, 30px);
     cursor: pointer;
+    user-select: none;
 
     &:hover {
-        background: ${(props) => props.hover || "#72BBEE"};
+        background: ${({ $hover }) => $hover || "#72BBEE"};
     }
 
     &:active {
-        background: ${(props) => props.active || "#5FACE2"};
+        background: ${({ $active }) => $active || "#5FACE2"};
     }
 `
 
 function Button(props) {
-    const {title, backgroundColor, hover, active, textColor, width, height, margin, onClick} = props;
+    const {title, $background, $hover, $active, $textColor, $width, $height, $margin, $border, onClick,} = props;
     return (
         <StyledButton
-        backgroundColor={backgroundColor}
-        hover={hover}
-        active={active}
-        textColor={textColor}
-        width={width}
-        height={height}
-        margin={margin}
-        onClick={onClick}
+            $background={$background}
+            $hover={$hover}
+            $active={$active}
+            $textColor={$textColor}
+            $width={$width}
+            $height={$height}
+            $margin={$margin}
+            $border={$border}
+            onClick={onClick}
         >
         {title||"Button"}
         </StyledButton>

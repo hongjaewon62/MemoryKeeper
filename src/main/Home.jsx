@@ -54,18 +54,6 @@ const Content = styled.div`
 `
 
 function Home() {
-    // const [hello, setHello] = useState('');
-
-    // useEffect(() => {
-    //     axios.get("/api/test")
-    //     .then((res) => {
-    //         console.log("응답 데이터:", res.data);
-    //         setHello(res.data);
-    //     }).catch((err) => {
-    //         console.error("요청 실패:", err);
-    //     });
-    // }, []);
-
     return (
         <Wrapper>
             <TitleWrapper>

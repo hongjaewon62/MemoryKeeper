@@ -35,6 +35,14 @@ const HeaderContentTitle = styled.div`
 
 function DropDownMenu() {
     const navigate = useNavigate();
+
+    const handleNavigate = (path, id, title) => {
+        navigate(path, {
+            state: {id, title},
+            replace: true
+        })
+    };
+
     return(
         <Wrapper>
             <HeaderContentWrapper>
@@ -55,13 +63,19 @@ function DropDownMenu() {
                 </HeaderContentTitle>
             </HeaderContentWrapper>
             <HeaderContentWrapper>
-                <HeaderContentTitle>
+                <HeaderContentTitle onClick={() => {
+                    handleNavigate("/borderList", "1", "치매이야기")
+                }}>
                     치매 이야기
                 </HeaderContentTitle>
-                <HeaderContentTitle>
+                <HeaderContentTitle onClick={() => {
+                    handleNavigate("/borderList", "2", "노하우 공유")
+                }}>
                     노하우 공유
                 </HeaderContentTitle>
-                <HeaderContentTitle>
+                <HeaderContentTitle onClick={() => {
+                    handleNavigate("/borderList", "3", "궁금해요")
+                }}>
                     궁금해요
                 </HeaderContentTitle>
             </HeaderContentWrapper>

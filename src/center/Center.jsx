@@ -13,6 +13,7 @@ const Wrapper = styled.div`
 
 const TitleWrapper = styled.div`
     margin-top: 5vh;
+    margin-bottom: 5vh;
     width: 80%;
 `
 
@@ -27,7 +28,6 @@ const ContentWrapper = styled.div`
     background: #F6FBFF;
     width: 80%;
     padding: 2vh 0;
-    margin-top: 5vh;
     margin-bottom: 3vh;
     border: 1px solid #000000;
 
@@ -95,6 +95,7 @@ const SearchSubmit = styled.input`
     height: clamp(20px, 3vh, 30px);
     width: clamp(100px, 3vh, 160px);
     margin-left: clamp(125px, 3vh, 230px);
+    margin-top: 1vh;
     background: #72BBEE;
     color: white;
     border: 1px solid #787878;
@@ -182,7 +183,7 @@ const CenterType = styled.span`
 `
 
 const CenterInfo = styled.div`
-  text-align: left;
+    text-align: left;
 `;
 
 const CenterTitle = styled.strong`
@@ -216,11 +217,10 @@ const PaginationWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 0.3s ease;
   }
 
   li.active {
-    background-color: #72bbee;
+    background: #72bbee;
     border-radius: 5px;
   }
 
@@ -239,7 +239,7 @@ const PaginationWrapper = styled.div`
   }
 
   a:hover {
-    background-color: #72bbee;
+    background: #72bbee;
     color: #ffffff;
     border-radius: 5px;
   }
@@ -248,12 +248,12 @@ const PaginationWrapper = styled.div`
 function Center() {
     const [selectSi, setSelectSi] = useState("전국");
     const [selectSigungu, setSelectSigungu] = useState("전국");
-    const [submit, setSubmit] = useState(false);
 
     const [centers, setCenters] = useState([]);
     const [keyword, setKeyword] = useState("");
 
     const [currentPage, setCurrentPage] = useState(1);
+    const [pageRange, setPageRange] = useState(10);
     const itemsPerPage = 10;
 
     const handlePageChange = (pageNumber) => {
@@ -288,6 +288,17 @@ function Center() {
         setCenters(data);
     };
     fetchData();
+    }, []);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setPageRange(window.innerWidth <= 800 ? 3 : 10);
+        }
+
+        handleResize();
+
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
     }, []);
 
     const indexOfLast = currentPage * itemsPerPage;
@@ -389,7 +400,7 @@ function Center() {
                 activePage={currentPage}
                 itemsCountPerPage={itemsPerPage}
                 totalItemsCount={centers.length}
-                pageRangeDisplayed={10}
+                pageRangeDisplayed={pageRange}
                 firstPageText={"<<"}
                 lastPageText={">>"}
                 nextPageText={">"}

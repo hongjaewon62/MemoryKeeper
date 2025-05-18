@@ -4,16 +4,17 @@ const InputWrapper = styled.div`
     position: relative;
     display: flex;
     align-items: center;
-    width: ${(props) => props.width || "100px"};
-    height: ${(props) => props.height || "30px"};
-    margin: ${(props) => props.margin || "none"};
+    width: ${({ $width }) => $width || "100px"};
+    height: ${({ $height }) => $height || "30px"};
+    margin: ${({ $margin }) => $margin || "none"};
 `;
 
 const StyledInput = styled.input`
     width: 100%;
     height: 100%;
-    padding-left: ${(props) => (props.icon ? "35px" : "10px")};
-    background: ${(props) => props.background || "#DDF0FF"};
+    padding-left: ${({ $icon, $iconPosition }) => ($icon && $iconPosition === "left" ? "35px" : "10px")};
+    padding-right: ${({ $icon, $iconPosition }) => ($icon && $iconPosition === "right" ? "35px" : "10px")};
+    background: ${({ $background }) => $background || "#DDF0FF"};
     border: 1px solid #cccccc;
     border-radius: 5px;
     outline: none;
@@ -22,23 +23,27 @@ const StyledInput = styled.input`
 
 const Icon = styled.img`
     position: absolute;
-    left: 10px;
+    ${({ $iconPosition }) => ($iconPosition === "left" ? "left: 10px;" : "right: 10px;")}
+
     width: 20px;
     height: 20px;
 `;
 
-function InputUI({ width, height, margin, background, type, placeholder, icon }) {
+function InputUI({ $width, $height, $margin, $background, type, placeholder, $icon, $iconPosition = "left", value, onChange }) {
     return (
         <InputWrapper 
-            width={width}
-            margin={margin}
-            height={height}>
-            {icon && <Icon src={icon} alt="icon" />}
+            $width={$width}
+            $margin={$margin}
+            $height={$height}>
+            {$icon && <Icon src={$icon} alt="icon" $iconPosition={$iconPosition} />}
             <StyledInput
-                background={background}
+                $background={$background}
                 type={type}
                 placeholder={placeholder}
-                icon={icon}
+                $icon={$icon}
+                $iconPosition={$iconPosition}
+                value={value}
+                onChange={onChange}
             />
         </InputWrapper>
     );

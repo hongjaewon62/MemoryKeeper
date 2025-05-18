@@ -6,6 +6,8 @@ import Login from "./Login/Login.jsx";
 import SignUp from "./login/SignUp.jsx";
 import Statistics from "./information/Statistics.jsx"
 import Center from "./center/center.jsx";
+import BorderList from "./border/BorderList.jsx";
+import BorderWrite from "./border/BroderWrite.jsx";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         <Route path="signUp" element={<SignUp />} />
         <Route path="statistics" element={<Statistics />} />
         <Route path="center" element={<Center />} />
+        <Route path="borderList" element={<BorderList />} />
+        <Route path="borderWrite" element={<BorderWrite />} />
       </Routes>
     </BrowserRouter>
   )

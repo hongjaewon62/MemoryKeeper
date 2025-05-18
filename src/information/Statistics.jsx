@@ -12,6 +12,7 @@ const Wrapper = styled.div`
 
 const TitleWrapper = styled.div`
     margin-top: 5vh;
+    margin-bottom: 5vh;
     width: 80%;
 `
 
@@ -27,7 +28,6 @@ const ContentWrapper = styled.div`
     background: #F6FBFF;
     width: 80%;
     padding: 2vh 0;
-    margin-top: 5vh;
     margin-bottom: 3vh;
     border: 1px solid #000000;
 `

@@ -51,11 +51,11 @@ function Login () {
         <Wrapper>
             <LoginText>회원가입</LoginText>
             <LoginWrapper>
-                <InputUI type="text" placeholder="아이디를 입력하세요" width={"80%"} height={"10%"} margin={"0 0 25px 0"} icon={"img/user.png"}/>
-                <InputUI type="email" placeholder="이메일을 입력하세요" width={"80%"} height={"10%"} margin={"0 0 25px 0"} icon={"img/mail.png"}/>
-                <InputUI type="password" placeholder="비밀번호를 입력하세요" width={"80%"} height={"10%"} margin={"0 0 25px 0"} icon={"img/password.png"}/>
-                <InputUI type="password" placeholder="비밀번호를 한번 더 입력하세요" width={"80%"} height={"10%"} margin={"0 0 25px 0"} icon={"img/confirmation.png"}/>
-                <Button title={"회원가입"} width={"80%"} height={"10%"} margin={"0 0 25px 0"} onClick={() => {
+                <InputUI type="text" placeholder="아이디를 입력하세요" $width={"80%"} $height={"10%"} $margin={"0 0 25px 0"} $icon={"img/user.png"}/>
+                <InputUI type="email" placeholder="이메일을 입력하세요" $width={"80%"} $height={"10%"} $margin={"0 0 25px 0"} $icon={"img/mail.png"}/>
+                <InputUI type="password" placeholder="비밀번호를 입력하세요" $width={"80%"} $height={"10%"} $margin={"0 0 25px 0"} $icon={"img/password.png"}/>
+                <InputUI type="password" placeholder="비밀번호를 한번 더 입력하세요" $width={"80%"} $height={"10%"} $margin={"0 0 25px 0"} $icon={"img/confirmation.png"}/>
+                <Button title={"회원가입"} $width={"80%"} $height={"10%"} $margin={"0 0 25px 0"} onClick={() => {
                     navigate("/login")
                 }} />
             </LoginWrapper>

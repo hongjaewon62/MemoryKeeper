@@ -51,14 +51,14 @@ function Login () {
         <Wrapper>
             <LoginText>로그인</LoginText>
             <LoginWrapper>
-                <InputUI type="text" placeholder="아이디를 입력하세요" width={"80%"} height={"10%"} margin={"0 0 25px 0"} icon={"img/user.png"}/>
-                <InputUI type="password" placeholder="비밀번호를 입력하세요" width={"80%"} height={"10%"} margin={"0 0 25px 0"} icon={"img/password.png"}/>
+                <InputUI type="text" placeholder="아이디를 입력하세요" $width={"80%"} $height={"10%"} $margin={"0 0 25px 0"} $icon={"img/user.png"}/>
+                <InputUI type="password" placeholder="비밀번호를 입력하세요" $width={"80%"} $height={"10%"} $margin={"0 0 25px 0"} $icon={"img/password.png"}/>
                 <CheckBoxDiv>
-                    <InputUI type="checkbox" width={"25px"} height={"25px"} />
+                    <InputUI type="checkbox" $width={"25px"} $height={"25px"} />
                     <CheckBoxText>아이디 저장</CheckBoxText>
                 </CheckBoxDiv>
-                <Button title={"로그인"} width={"80%"} height={"10%"} margin={"0 0 25px 0"} />
-                <Button title={"회원가입"} width={"80%"} height={"10%"} margin={"0 0 25px 0"} onClick={() => {
+                <Button title={"로그인"} $width={"80%"} $height={"10%"} $margin={"0 0 25px 0"} />
+                <Button title={"회원가입"} $width={"80%"} $height={"10%"} $margin={"0 0 25px 0"} onClick={() => {
                     navigate("/signUp")
                 }} />
             </LoginWrapper>
