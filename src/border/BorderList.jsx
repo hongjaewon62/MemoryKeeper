@@ -311,9 +311,9 @@ function BorderList() {
                                 <tr key={item.id}>
                                     <td className="number">{item.id}</td>
                                     <td className="title">{item.title}</td>
-                                    <td className="writer">{item.writer}</td>
-                                    <td className="recodeDate">{item.recodeDate}</td>
-                                    <td className="hits">{item.hits}</td>
+                                    <td className="writer">{item.username}</td>
+                                    <td className="recodeDate">{item.createdAt?.slice(0, 10)}</td>
+                                    <td className="hits">{item.viewCount}</td>
                                 </tr>
                             ))
                         ) : (
