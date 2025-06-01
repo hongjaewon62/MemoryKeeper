@@ -60,10 +60,10 @@ function Login () {
                     password: password
                 }
             });
-
+            localStorage.setItem("user", JSON.stringify(response.data));
             navigate("/home");
         } catch(error) {
-            alert("로그인 실패");
+            alert("로그인 실패 :" + error.response.data);
         }
     };
 

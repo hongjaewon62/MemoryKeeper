@@ -1,9 +1,10 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../ui/Button";
 import InputUI from "../ui/InputUI";
 import BorderWriteEditor from "./BorderWriteEditor";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Wrapper = styled.div`
     display: flex;
@@ -58,17 +59,32 @@ const BottomSubmitWrapper = styled.div`
 
 function BorderWrite() {
     const navigate = useNavigate();
+    const {id} = useParams();
 
     const [content, setContent] = useState("");
     const [category, setCategory] = useState("");
     const [title, setTitle] = useState("");
 
+    useEffect(() => {
+        if (id) {
+            axios.get(`/api/borders/id/${id}`)
+                .then(res => {
+                    setCategory(res.data.category);
+                    setTitle(res.data.title);
+                    setContent(res.data.content);
+                })
+                .catch(err => {
+                    alert("게시글 정보를 불러오지 못했습니다.");
+                })
+        }
+    }, [id]);
+
     const handleContentChange = (value) => {
         setContent(value);
         // console.log("작성한 내용:", value);
-  };
+    };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
     
         if (!category || !title || !content) {
@@ -79,13 +95,42 @@ function BorderWrite() {
         console.log("카테고리:", category);
         console.log("제목:", title);
         console.log("내용:", content);
-  };
+        const user = JSON.parse(localStorage.getItem("user"));
+
+        try {
+            if (id) {
+                // 수정
+                await axios.put(`/api/borders/id/${id}`, {
+                    category,
+                    title,
+                    content,
+                    userId: user.id,
+                });
+                navigate(`/borderDetail/${id}`);
+            } else {
+                // 작성
+                const res = await axios.post("/api/borders", {
+                    category,
+                    title,
+                    content,
+                    userId: user.id,
+                });
+                navigate(`/borderList`);
+            }
+        } catch (error) {
+            alert("게시글 저장 실패: " + (error?.response?.data?.message || ""));
+        }
+    };
 
     return (
         <Wrapper>
             <BeforeTextWrapper>
                 <BeforeText onClick={() => {
-                    navigate(-1)
+                        if (id) {
+                            navigate("/borderList");
+                        } else {
+                            navigate(-1);
+                        }
                 }}>
                     &lt; 게시글로
                 </BeforeText>
@@ -93,8 +138,8 @@ function BorderWrite() {
             <ContentWrapper>
                 <form onSubmit={handleSubmit}>
                     <HeaderWrapper>
-                        <Title>글쓰기</Title>
-                        <Button title="등록" $width="10%" type="sumit" onClick={handleSubmit} />
+                        <Title>{id ? "게시글 수정" : "글쓰기"}</Title>
+                        <Button title={id ? "수정" : "등록"} $width="10%" type="submit" onClick={handleSubmit} />
                     </HeaderWrapper>
                     <CategorySelect
                         value={category}
@@ -102,9 +147,9 @@ function BorderWrite() {
                         <option value="" hidden>
                             게시판 선택
                         </option>
-                        <option value="1"> 기억나눔터</option>
-                        <option value="2"> 노하우 공유</option>
-                        <option value="3"> 궁금해요</option>
+                        <option value="치매이야기"> 치매이야기</option>
+                        <option value="노하우 공유"> 노하우 공유</option>
+                        <option value="궁금해요"> 궁금해요</option>
                     </CategorySelect>
                     <InputUI
                         $margin="2vh"
@@ -114,9 +159,9 @@ function BorderWrite() {
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                     />
-                    <BorderWriteEditor onContentChange={handleContentChange} />
+                    <BorderWriteEditor value={content} onContentChange={handleContentChange} />
                     <BottomSubmitWrapper>
-                        <Button title="등록" $width="10%" type="sumit" onClick={handleSubmit}/>
+                        <Button title={id ? "수정" : "등록"} $width="10%" type="submit" onClick={handleSubmit}/>
                     </BottomSubmitWrapper>
                 </form>
             </ContentWrapper>

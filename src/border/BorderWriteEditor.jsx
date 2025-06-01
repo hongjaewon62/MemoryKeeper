@@ -1,13 +1,26 @@
 import { useState } from "react";
-import ReactQuill from "react-quill-new"
+import ReactQuill, {Quill} from "react-quill-new"
 import "react-quill-new/dist/quill.snow.css";
 import styled from "styled-components";
+// import ImageResize from "quill-image-resize-module-react";
+
+// if (typeof window !== 'undefined' && window.Quill) {
+//   window.Quill = Quill;
+// }
+
+// Quill.register("modules/imageResize", ImageResize);
 
 const Wrapper = styled.div`
     background: white;
+
+    .ql-editor img {
+        max-width: 500px;
+        max-height: 500px; 
+        object-fit: contain;
+  }
 `
 
-function BorderWriteEditor({ onContentChange }) {
+function BorderWriteEditor({ value, onContentChange }) {
     const [content, setContent] = useState("");
     const handleContentChange = (value) => {
         setContent(value);
@@ -23,12 +36,15 @@ function BorderWriteEditor({ onContentChange }) {
       [{ align: [] }],
       ["image", "link"],
     ],
+    //     ImageResize: {
+    //     modules: ['Resize', 'DisplaySize']
+    // },
   };
 
     return (
         <Wrapper>
             <ReactQuill
-                value={content}
+                value={value}
                 onChange={handleContentChange}
                 modules={modules}
                 placeholder="내용을 입력하세요"

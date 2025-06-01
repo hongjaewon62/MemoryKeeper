@@ -66,7 +66,7 @@ function DropDownMenu() {
                 <HeaderContentTitle onClick={() => {
                     handleNavigate("/borderList", "1", "치매이야기")
                 }}>
-                    치매 이야기
+                    치매이야기
                 </HeaderContentTitle>
                 <HeaderContentTitle onClick={() => {
                     handleNavigate("/borderList", "2", "노하우 공유")

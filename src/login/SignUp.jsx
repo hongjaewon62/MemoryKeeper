@@ -33,7 +33,7 @@ const LoginText = styled.div`
     margin-bottom: clamp(10px, 20px, 40px);
 `
 
-function Login () {
+function SignUp () {
     const navigate = useNavigate();
 
     const [username, setUsername] = useState("");
@@ -109,4 +109,4 @@ function Login () {
     )
 }
 
-export default Login;
+export default SignUp;

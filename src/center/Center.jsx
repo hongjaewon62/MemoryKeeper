@@ -199,50 +199,50 @@ const CenterAddress = styled.span`
 `
 
 const PaginationWrapper = styled.div`
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-
-  ul {
-    display: flex;
-    list-style: none;
-    padding: 0;
-  }
-
-  li {
-    margin: 0 clamp(3px, 1vw, 8px);
-    cursor: pointer;
-    width: clamp(30px, 3vw, 40px);
-    height: clamp(30px, 3vw, 40px);
+    margin-top: 20px;
     display: flex;
     justify-content: center;
-    align-items: center;
-  }
 
-  li.active {
-    background: #72bbee;
-    border-radius: 5px;
-  }
+    ul {
+        display: flex;
+        list-style: none;
+        padding: 0;
+    }
 
-  li.active a {
-    color: #ffffff;
-  }
+    li {
+        margin: 0 clamp(3px, 1vw, 8px);
+        cursor: pointer;
+        width: clamp(30px, 3vw, 40px);
+        height: clamp(30px, 3vw, 40px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-  a {
-    color: #000000;
-    text-decoration: none;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+    li.active {
+        background: #72bbee;
+        border-radius: 5px;
+    }
 
-  a:hover {
-    background: #72bbee;
-    color: #ffffff;
-    border-radius: 5px;
-  }
+    li.active a {
+        color: #ffffff;
+    }
+
+    a {
+        color: #000000;
+        text-decoration: none;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    a:hover {
+        background: #72bbee;
+        color: #ffffff;
+        border-radius: 5px;
+    }
 `
 
 function Center() {
@@ -306,9 +306,9 @@ function Center() {
     const currentItems = centers.slice(indexOfFirst, indexOfLast);
 
     const fetchCenters = async(si, sigungu, keyword) => {
-    const roadnameaddress = `${si} ${sigungu}`.trim();
-    const validAddress = roadnameaddress !== "" ? roadnameaddress : null;
-    const validName = keyword !== "" ? keyword : null;
+        const roadnameaddress = `${si} ${sigungu}`.trim();
+        const validAddress = roadnameaddress !== "" ? roadnameaddress : null;
+        const validName = keyword !== "" ? keyword : null;
 
         try {
             const response = await axios.get("/api/centers/search", {

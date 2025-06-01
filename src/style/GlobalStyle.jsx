@@ -8,6 +8,10 @@ const GlobalStyle = createGlobalStyle`
         padding: 0;
         overflow-y: scroll;     // 스크롤바 활성화
     }
+
+    .ql-align-center { text-align: center; }
+    .ql-align-right { text-align: right; }
+    .ql-align-left { text-align: left; }
 `
 
 export default GlobalStyle;

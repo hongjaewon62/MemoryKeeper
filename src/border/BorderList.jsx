@@ -201,6 +201,17 @@ function BorderList() {
         setCurrentTitle(title);
     };
 
+    const handleWrite = () => {
+        const user = localStorage.getItem("user");
+        if (!user) {
+            navigate("/login");
+            return;
+        }
+        else {
+            navigate("/borderWrite");
+        }
+        }
+
     useEffect(() => {
         setCurrentBorder(id);
         setCurrentTitle(title);
@@ -240,8 +251,8 @@ function BorderList() {
 
     const fetchBordersByCategory = async (category) => {
         try {
-            const response = await axios.get(`/api/borders/${category}`);
-            setBorders(response.data);
+            const res = await axios.get(`/api/borders/${category}`);
+            setBorders(res.data);
         } catch (error) {
             console.error("게시판 에러:", error);
         }
@@ -282,7 +293,7 @@ function BorderList() {
                     <ActionWrapper>
                         <InputUI type="text" placeholder="검색" $background="white" $width="50%" $height="10%" $margin="0 10px 0 0" $icon="img/search.png" $iconPosition="right"/>
                         <Button title="글쓰기" $width="20%" $height="10%" $margin="0 0 0 0" $textColor="black" $background="white" $hover="#e6e6e6" $active="#b9b9b9" $border="1px solid #cccccc" onClick={() => {
-                            navigate("/borderWrite")
+                            handleWrite();
                         }} />
                     </ActionWrapper>
                 </ContentHeaderWrapper>
@@ -308,7 +319,9 @@ function BorderList() {
                         ))}                        
                         {currentItems.length > 0 ? (
                             currentItems.map((item) => (
-                                <tr key={item.id}>
+                                <tr key={item.id} onClick={() => {
+                                    navigate(`/borderDetail/${item.id}`)
+                                }}>
                                     <td className="number">{item.id}</td>
                                     <td className="title">{item.title}</td>
                                     <td className="writer">{item.username}</td>

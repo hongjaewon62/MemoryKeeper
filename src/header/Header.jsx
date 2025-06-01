@@ -50,22 +50,44 @@ const LoginWrapper = styled.div`
 
 const LoginTitle = styled.span`
     color: white;
-    font-size: clamp(0.5vw, 1.05vw, 1.1vw);
+    font-size: clamp(0.5vw, 1vw, 1.1vw);
     font-weight: 500;
 `
+
+const LogoutButton = styled.button`
+    background: none;
+    border: none;
+    color: white;
+    font-size: clamp(0.5vw, 1vw, 1.1vw);
+    font-weight: 500;
+    cursor: pointer;
+`;
 
 function Header() {
     const navigate = useNavigate();
     const location = useLocation();
     const [isOpen, setIsOpen] = useState(false);
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
         setIsOpen(false);
+        const loginUser = localStorage.getItem("user");
+        if (loginUser) {
+            setUser(JSON.parse(loginUser));
+        } else {
+            setUser(null);
+        }
     }, [location.pathname]);
 
     const handleTogle = () => {
         setIsOpen((prev) => !prev);
     }
+
+    const handleLogout = () => {
+        localStorage.removeItem("user");
+        setUser(null);
+        navigate("/login");
+    };
 
     return (
         <>
@@ -73,16 +95,20 @@ function Header() {
                 <LogoWrapper onClick={() => {
                     navigate("/")
                 }}>
-                    <LogoImg src="img/logo.PNG" />
+                    <LogoImg src="/img/logo.PNG" />
                     <LogoTitle>기억지킴이</LogoTitle>
                 </LogoWrapper>
                 <NavBar onToggle={handleTogle}/>
                 <LoginWrapper>
-                    <LoginTitle onClick={() => {
-                        navigate("/login")
-                    }}>
-                        로그인 / 회원가입
-                    </LoginTitle>
+                    {user ? (
+                        <>
+                            <LogoutButton onClick={handleLogout}>로그아웃</LogoutButton>
+                        </>
+                        ) : (
+                            <LoginTitle onClick={() => navigate("/login")}>
+                                로그인 / 회원가입
+                            </LoginTitle>
+                    )}
                 </LoginWrapper>
             </Wrapper>
             {isOpen && <DropDownMenu />}
