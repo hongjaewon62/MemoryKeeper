@@ -80,10 +80,14 @@ function DropDownMenu() {
                 </HeaderContentTitle>
             </HeaderContentWrapper>
             <HeaderContentWrapper>
-                <HeaderContentTitle>
+                <HeaderContentTitle onClick={() => {
+                    navigate("/musicListen")
+                }}>
                     음악 듣기
                 </HeaderContentTitle>
-                <HeaderContentTitle>
+                <HeaderContentTitle onClick={() => {
+                    navigate("/addMusic")
+                }}>
                     음악 추가
                 </HeaderContentTitle>
             </HeaderContentWrapper>
