@@ -308,7 +308,8 @@ function BorderList() {
                         </tr>
                     </thead>
                     <tbody>
-                        {popularData.map((item) => (
+                        {/* 인기글 */}
+                        {/* {popularData.map((item) => (
                             <tr key={item.id}>
                                 <td className="number"><b>{item.id}</b></td>
                                 <td className="title"><b>{item.title}</b></td>
@@ -316,7 +317,7 @@ function BorderList() {
                                 <td className="recodeDate"><b>{item.recodeDate}</b></td>
                                 <td className="hits"><b>{item.hits}</b></td>
                             </tr>
-                        ))}                        
+                        ))}                         */}
                         {currentItems.length > 0 ? (
                             currentItems.map((item) => (
                                 <tr key={item.id} onClick={() => {

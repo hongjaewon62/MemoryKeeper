@@ -4,6 +4,7 @@ import Header from "./header/header.jsx";
 import Home from "./main/home.jsx";
 import Login from "./Login/Login.jsx";
 import SignUp from "./login/SignUp.jsx";
+import DementiaInformation from "./information/DementiaInformation.jsx";
 import Statistics from "./information/Statistics.jsx"
 import Center from "./center/center.jsx";
 import BorderList from "./border/BorderList.jsx";
@@ -11,28 +12,31 @@ import BorderWrite from "./border/BroderWrite.jsx";
 import BorderDetail from "./border/BorderDetail.jsx";
 import MusicListen from "./music/musicListen.jsx";
 import AddMusic from "./music/AddMusic.jsx";
+import MemoryGame from "./game/MemoryGame.jsx";
 
 function App() {
-  return (
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
-      <GlobalStyle />
-      <Header />
-      <Routes>
-        <Route index element={<Home />}/>
-        <Route path="home" element={<Home />} />
-        <Route path="login" element={<Login />} />
-        <Route path="signUp" element={<SignUp />} />
-        <Route path="statistics" element={<Statistics />} />
-        <Route path="center" element={<Center />} />
-        <Route path="borderList" element={<BorderList />} />
-        <Route path="borderWrite" element={<BorderWrite />} />
-        <Route path="borderDetail/:id" element={<BorderDetail />} />
-        <Route path="/borderEdit/:id" element={<BorderWrite />} />
-        <Route path="/musicListen" element={<MusicListen />} />
-        <Route path="/addMusic" element={<AddMusic />} />
-      </Routes>
-    </BrowserRouter>
-  )
+    return (
+        <BrowserRouter basename={import.meta.env.BASE_URL}>
+            <GlobalStyle />
+            <Header />
+            <Routes>
+                <Route index element={<Home />}/>
+                <Route path="/home" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signUp" element={<SignUp />} />
+                <Route path="/information" element={<DementiaInformation />} />
+                <Route path="/statistics" element={<Statistics />} />
+                <Route path="/center" element={<Center />} />
+                <Route path="/borderList" element={<BorderList />} />
+                <Route path="/borderWrite" element={<BorderWrite />} />
+                <Route path="/borderDetail/:id" element={<BorderDetail />} />
+                <Route path="/borderEdit/:id" element={<BorderWrite />} />
+                <Route path="/musicListen" element={<MusicListen />} />
+                <Route path="/addMusic" element={<AddMusic />} />
+                <Route path="/memoryGame" element={<MemoryGame />} />
+            </Routes>
+        </BrowserRouter>
+    )
 }
 
 export default App

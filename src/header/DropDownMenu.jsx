@@ -46,7 +46,9 @@ function DropDownMenu() {
     return(
         <Wrapper>
             <HeaderContentWrapper>
-                <HeaderContentTitle>
+                <HeaderContentTitle onClick={() => {
+                    navigate("/information")
+                }}>
                     치매 정보 
                 </HeaderContentTitle>
                 <HeaderContentTitle onClick={() => {
@@ -92,7 +94,9 @@ function DropDownMenu() {
                 </HeaderContentTitle>
             </HeaderContentWrapper>
             <HeaderContentWrapper>
-                <HeaderContentTitle>
+                <HeaderContentTitle onClick={() => {
+                    navigate("/memoryGame")
+                }}>
                     기억력 게임
                 </HeaderContentTitle>
                 <HeaderContentTitle>
