@@ -4,6 +4,7 @@ import InputUI from "../ui/InputUI";
 import Button from "../ui/Button";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import { useAuth } from "../context/AuthContext";
 
 const Wrapper = styled.div`
     display: flex;
@@ -75,6 +76,7 @@ const ErrorMessage = styled.span`
 
 function Login () {
     const navigate = useNavigate();
+    const {login} = useAuth();
 
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
@@ -130,7 +132,9 @@ function Login () {
                     password: password
                 }
             });
-            localStorage.setItem("user", JSON.stringify(response.data));
+            // localStorage.setItem("user", JSON.stringify(response.data));
+            const userData = response.data;
+            login(userData);
 
             if(savedId) {
                 localStorage.setItem("savedId", id);

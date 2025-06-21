@@ -3,6 +3,7 @@ import NavBar from "./NavBar";
 import { useLocation, useNavigate } from "react-router-dom";
 import DropDownMenu from "./DropDownMenu";
 import { useEffect, useState } from "react";
+import { useAuth } from "../context/AuthContext";
 
 const Wrapper = styled.div`
     display: flex;
@@ -66,6 +67,7 @@ const LogoutButton = styled.button`
 function Header() {
     const navigate = useNavigate();
     const location = useLocation();
+    const {logout} = useAuth();
     const [isOpen, setIsOpen] = useState(false);
     const [user, setUser] = useState(null);
 
@@ -84,7 +86,8 @@ function Header() {
     }
 
     const handleLogout = () => {
-        localStorage.removeItem("user");
+        // localStorage.removeItem("user");
+        logout();
         setUser(null);
         navigate("/login");
     };

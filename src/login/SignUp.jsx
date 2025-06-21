@@ -167,6 +167,17 @@ function SignUp () {
                 <ErrorWrapper $visible={writeEmail}>
                     <ErrorMessage>이메일을 입력하세요</ErrorMessage>
                 </ErrorWrapper>
+                {/* <InputUI
+                    type="text"
+                    placeholder="인증번호를 입력하세요"
+                    $width="80%"
+                    $height="10%"
+                    $margin="10px 0 0 0"
+                    $icon="img/mail.png"
+                />
+                <ErrorWrapper $visible={writeEmail}>
+                    <ErrorMessage>인증번호를 입력하세요</ErrorMessage>
+                </ErrorWrapper> */}
                 <InputUI
                     type="password"
                     placeholder="비밀번호를 입력하세요"

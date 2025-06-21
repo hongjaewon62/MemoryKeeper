@@ -20,7 +20,7 @@ const StyledInput = styled.input`
     border: 1px solid #cccccc;
     border-radius: 5px;
     outline: none;
-    font-size: clamp(10px, 1vw, 30px);
+    font-size: clamp(10px, 0.9em, 30px);
 
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
@@ -48,10 +48,30 @@ const ShowPasswordButton = styled.button`
     right: 10px;
 `
 
+// const ShowEmailButton = styled.button`
+//     position: absolute;
+//     border: none;
+//     border-radius: 10px;
+//     background: #72bbee;
+//     cursor: pointer;
+//     right: 10px;
+//     color: white;
+//     font-size: clamp(8px, 0.9em, 20px);
+
+//     &:hover {
+//         background: #5FACE2;
+//     }
+
+//     &:active {
+//         background: #5FACE2;
+//     }
+// `
+
 const InputUI = forwardRef(({ $width, $height, $margin, $background, type, placeholder, $icon, $iconPosition = "left", value, onChange, checked }, ref) => {
     const [showPassword, setShowPassword] = useState(false);
     const isPassword = type === "password";
     const actualType = isPassword ? (showPassword ? "text" : "password") : type;
+    // const isEmail = type === "email";
 
     return (
         <InputWrapper 
@@ -75,6 +95,11 @@ const InputUI = forwardRef(({ $width, $height, $margin, $background, type, place
                     {showPassword ? <FaEye size="20" /> : <FaEyeSlash size="20" /> }
                 </ShowPasswordButton>
             )}
+            {/* {isEmail && (
+                <ShowEmailButton>
+                    인증번호
+                </ShowEmailButton>
+            )} */}
         </InputWrapper>
     );
 })

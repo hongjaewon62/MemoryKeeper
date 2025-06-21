@@ -13,7 +13,7 @@ const TitleWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     margin-top: 5vh;
-    margin-bottom: 5vh;
+    margin-bottom: 10vh;
     width: 80%;
 `
 
@@ -176,6 +176,12 @@ const DeleteButton = styled.div`
     }
 `
 
+const NotificationText = styled.span`
+    color: gray;
+    margin: 2vh;
+    font-size: clamp(16px, 2vh, 24px);
+`
+
 function AddMusic() {
     const [question, setQuestion] = useState(false);
     const [showInput, setShowInput] = useState(false);
@@ -185,6 +191,8 @@ function AddMusic() {
     });
     const [inputUrl, setInputUrl] = useState("");
     const [deleteMenu, setDeleteMenu] = useState(null);
+
+    const [loginCheck, setLoginCheck] = useState(false);
 
     const formatDuration = (isoDuration) => {
     const match = isoDuration.match(/PT(?:(\d+)M)?(?:(\d+)S)?/);
@@ -253,6 +261,16 @@ function AddMusic() {
         localStorage.setItem("playlist", JSON.stringify(playlist));
     }, [playlist]);
 
+    useEffect(() => {
+        const user = localStorage.getItem("user");
+        if (!user) {
+            setLoginCheck(false);
+        }
+        else {
+            setLoginCheck(true);
+        }
+    }, [])
+
     return (
         <Wrapper>
             <TitleWrapper>
@@ -267,34 +285,42 @@ function AddMusic() {
                 </QuestionWrapper>
             </TitleWrapper>
             <ContentWrapper>
-                {!showInput ? 
-                    <AddMusicButton onClick={toggleAddMusicInput}>
-                        + 음악추가
-                    </AddMusicButton>
-                    :
-                    <AddMusicInputWrapper>
-                        <AddMusicInput
-                            type="text"
-                            value={inputUrl}
-                            onChange={(e) => setInputUrl(e.target.value)}
-                            placeholder="유튜브 링크 입력"
-                        />
-                        <AddMusicInputButtonWrapper>
-                            <Button title="취소" $width="clamp(30px, 6vw, 100px)" $background="#EE7272" $hover="#EE7272" $active="#de6262" onClick={toggleAddMusicInput} />
-                            <Button title="등록" $width="clamp(30px, 6vw, 100px)" onClick={addMusic} />
-                        </AddMusicInputButtonWrapper>
-                    </AddMusicInputWrapper>
+                {loginCheck ? (
+                    <>
+                        {!showInput ? 
+                        <AddMusicButton onClick={toggleAddMusicInput}>
+                            + 음악추가
+                        </AddMusicButton>
+                        :
+                        <AddMusicInputWrapper>
+                            <AddMusicInput
+                                type="text"
+                                value={inputUrl}
+                                onChange={(e) => setInputUrl(e.target.value)}
+                                placeholder="유튜브 링크 입력"
+                            />
+                            <AddMusicInputButtonWrapper>
+                                <Button title="취소" $width="clamp(30px, 6vw, 100px)" $background="#EE7272" $hover="#EE7272" $active="#de6262" onClick={toggleAddMusicInput} />
+                                <Button title="등록" $width="clamp(30px, 6vw, 100px)" onClick={addMusic} />
+                            </AddMusicInputButtonWrapper>
+                        </AddMusicInputWrapper>
+                    }
+
+                        <InfoTable>
+                            <thead>
+                                <tr>
+                                    <th className="title">제목</th>
+                                    <th className="singer">가수</th>
+                                    <th className="duration">시간</th>
+                                </tr>
+                            </thead>
+                        </InfoTable>
+                    </>) :
+                    (<NotificationText>
+                        로그인해 음악을 추가해 보세요
+                    </NotificationText>)
                 }
 
-                <InfoTable>
-                    <thead>
-                        <tr>
-                            <th className="title">제목</th>
-                            <th className="singer">가수</th>
-                            <th className="duration">시간</th>
-                        </tr>
-                    </thead>
-                </InfoTable>
                 {playlist.map((item) => (
                     <ItemWrapper
                         key={item.id}

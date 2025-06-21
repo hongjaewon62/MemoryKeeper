@@ -202,14 +202,14 @@ function BorderList() {
     };
 
     const handleWrite = () => {
-        const user = localStorage.getItem("user");
-        if (!user) {
-            navigate("/login");
-            return;
-        }
-        else {
-            navigate("/borderWrite");
-        }
+            const user = localStorage.getItem("user");
+            if (!user) {
+                navigate("/login");
+                return;
+            }
+            else {
+                navigate("/borderWrite");
+            }
         }
 
     useEffect(() => {
