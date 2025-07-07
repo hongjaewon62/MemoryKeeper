@@ -46,6 +46,11 @@ const TitleWrapper = styled.div`
     margin-top: 5vh;
     margin-bottom: 5vh;
     width: 80%;
+    
+    @media (max-width: 800px) {
+        margin-top: 2vh;
+        margin-bottom: 2vh;
+    }
 `
 
 const TitleGroup = styled.div`
@@ -114,6 +119,9 @@ const ScoreWrapper = styled.div`
     align-items: start;
     flex-direction: column;
 `
+const BestScoreWrapper = styled.div`
+    font-size: clamp(10px, 2vw, 20px);
+`
 
 const TimeWrapper = styled.div`
     display: flex;
@@ -129,18 +137,18 @@ const TimeText = styled.span`
 
 const Grid = styled.div`
     display: grid;
-    grid-template-columns: repeat(6, 100px);
-    grid-gap: 10px;
+    grid-template-columns: repeat(6, minmax(clamp(50px, 10vw, 100px), 1fr));
+    gap: 10px;
 `;
 
 const Card = styled.div`
-    width: 100px;
-    height: 100px;
+    width: clamp(30px, 14vw, 100px);
+    aspect-ratio: 1 / 1;
     background: #72bbee;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 50px;
+    font-size: clamp(20px, 5vw, 50px);
     cursor: pointer;
     border: 1px solid black;
     border-radius: 10px;
@@ -188,8 +196,9 @@ const CardBack = styled.div`
 `;
 
 const CardImg = styled.img`
-    width: 60px;
-    height: 60px;
+    width: clamp(30px, 40%, 70px);
+    height: clamp(30px, 40%, 70px);
+    object-fit: contain;
 `
 
 const Modal = styled.div`
@@ -291,6 +300,7 @@ function MemoryGame() {
         setMatched([]);
         setScore(0);
         setTime(0);
+        setPreviewTime(5);
         setGameOver(false);
         setIsStarted(true);
         setIsPreview(true);
@@ -302,6 +312,7 @@ function MemoryGame() {
         setMatched([]);
         setScore(0);
         setTime(0);
+        setPreviewTime(5);
         setGameOver(false);
         setIsStarted(true);
         setIsPreview(true);
@@ -328,7 +339,7 @@ function MemoryGame() {
                 <ScoreBoard>
                     <ScoreWrapper>
                         <Title>점수: {score}</Title>
-                        <div>최고 점수: {highScore}</div>
+                        <BestScoreWrapper>최고 점수: {highScore}</BestScoreWrapper>
                     </ScoreWrapper>
                     {isStarted && <TimeWrapper>
                         <Title>시간</Title>

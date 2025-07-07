@@ -31,13 +31,13 @@ function App() {
                     <Route path="/statistics" element={<Statistics />} />
                     <Route path="/center" element={<Center />} />
                     <Route path="/borderList" element={<BorderList />} />
-                    <Route path="/borderEdit/:id" element={<BorderWrite />} />
+                    <Route path="/borderDetail/:id" element={<BorderDetail />} />
                     <Route path="/musicListen" element={<MusicListen />} />
                     <Route path="/memoryGame" element={<MemoryGame />} />
 
                     <Route element={<PrivateRoute />}>
                         <Route path="/borderWrite" element={<BorderWrite />} />
-                        <Route path="/borderDetail/:id" element={<BorderDetail />} />
+                        <Route path="/borderEdit/:id" element={<BorderWrite />} />
                         <Route path="/addMusic" element={<AddMusic />} />
                     </Route>
                 </Routes>

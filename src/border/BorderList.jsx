@@ -17,6 +17,11 @@ const TitleWrapper = styled.div`
     margin-top: 5vh;
     margin-bottom: 5vh;
     width: 80%;
+    
+    @media (max-width: 800px) {
+        margin-top: 2vh;
+        margin-bottom: 2vh;
+    }
 `
 
 const Title = styled.span`
@@ -197,8 +202,10 @@ function BorderList() {
     }
 
     const handleClick = (id, title) => {
+        setCurrentPage(1);
         setCurrentBorder(id);
         setCurrentTitle(title);
+        navigate("/borderList", { state: { id, title } });
     };
 
     const handleWrite = () => {

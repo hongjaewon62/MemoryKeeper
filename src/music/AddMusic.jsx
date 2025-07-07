@@ -15,6 +15,11 @@ const TitleWrapper = styled.div`
     margin-top: 5vh;
     margin-bottom: 10vh;
     width: 80%;
+    
+    @media (max-width: 800px) {
+        margin-top: 2vh;
+        margin-bottom: 2vh;
+    }
 `
 
 const Title = styled.span`
