@@ -236,10 +236,7 @@ function AddMusic() {
     };
 
     const fetchVideoInfo = async (videoId) => {
-        const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
-        const res = await fetch(
-            `https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails&id=${videoId}&key=${API_KEY}`
-        );
+        const res = await fetch(`/api/youtube/music?id=${videoId}`);
         const data = await res.json();
         const snippet = data.items[0].snippet;
         const duration = data.items[0].contentDetails.duration;
