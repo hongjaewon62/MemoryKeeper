@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import styled from 'styled-components';
+import api from "../api/axios";
 
 const Wrapper = styled.div`
   /* display: flex; */
@@ -61,7 +62,7 @@ const InformationStatistics = ({
 
   const fetchChartData = async() => {
     try {
-      const response = await axios.get("/api/statistics/search", {
+      const response = await api.get("/statistics/search", {
         params: {year, si, sigungu, gender, chartTitle},
       });
       const result = response.data;

@@ -5,6 +5,7 @@ import Button from "../ui/Button";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
+import api from "../api/axios";
 
 const Wrapper = styled.div`
     display: flex;
@@ -126,7 +127,7 @@ function Login () {
         }
 
         try {
-            const response = await axios.post("/api/users/login", null, {
+            const response = await api.post("/users/login", null, {
                 params: {
                     username: id,
                     password: password

@@ -5,6 +5,7 @@ import InputUI from "../ui/InputUI";
 import Button from "../ui/Button";
 import { useRef, useState } from "react";
 import axios from "axios";
+import api from "../api/axios";
 
 const Wrapper = styled.div`
     display: flex;
@@ -128,7 +129,7 @@ function SignUp () {
                 password: password
             };
 
-            const res = await axios.post("/api/users/signUp", userData);
+            const res = await api.post("/users/signUp", userData);
 
             navigate("/login");
         } catch (error) {

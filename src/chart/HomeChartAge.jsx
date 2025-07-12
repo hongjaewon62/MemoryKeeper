@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import ApexCharts from "apexcharts";
 import axios from "axios";
+import api from "../api/axios";
 
 const Wrapper = styled.div`
   display: flex;
@@ -62,7 +63,7 @@ const HomeChartAge = ({chartCode}) => {
   });
 
   useEffect(() => {
-    axios.get(`/api/charts/${chartCode}`)
+    api.get(`/charts/${chartCode}`)
     .then((res) => {
       const {chartType, items} = res.data;
       setState({

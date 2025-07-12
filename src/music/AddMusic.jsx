@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Button from "../ui/Button";
+import api from './../api/axios';
 
 const Wrapper = styled.div`
     display: flex;
@@ -236,8 +237,8 @@ function AddMusic() {
     };
 
     const fetchVideoInfo = async (videoId) => {
-        const res = await fetch(`/api/youtube/music?id=${videoId}`);
-        const data = await res.json();
+        const res = await api.get(`/youtube/music`, { params: { id: videoId } });
+        const data = res.data;
         const snippet = data.items[0].snippet;
         const duration = data.items[0].contentDetails.duration;
         return {

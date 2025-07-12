@@ -5,6 +5,7 @@ import Button from "../ui/Button";
 import { useLocation, useNavigate } from "react-router-dom";
 import Pagination from "react-js-pagination";
 import axios from "axios";
+import api from "../api/axios";
 
 const Wrapper = styled.div`
     display: flex;
@@ -258,7 +259,7 @@ function BorderList() {
 
     const fetchBordersByCategory = async (category) => {
         try {
-            const res = await axios.get(`/api/borders/${category}`);
+            const res = await api.get(`/borders/${category}`);
             setBorders(res.data);
         } catch (error) {
             console.error("게시판 에러:", error);

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import api from "../api/axios";
 
 const Wrapper = styled.div`
     display: flex;
@@ -251,7 +252,7 @@ function BorderDetail() {
     const handleDelete = async () => {
         if (window.confirm("게시글을 삭제하시겠습니까?")) {
             try {
-                await axios.delete(`/api/borders/id/${id}?userId=${user.id}`);
+                await api.delete(`/borders/id/${id}?userId=${user.id}`);
                 alert("삭제되었습니다.");
                 navigate("/borderList");
             } catch (err) {
@@ -266,7 +267,7 @@ function BorderDetail() {
 
     const fetchComments = async () => {
         try {
-            const res = await axios.get(`/api/comments/${id}`);
+            const res = await api.get(`/comments/${id}`);
             setComments(res.data);
         } catch(e) {
             setComments([]);
@@ -281,7 +282,7 @@ function BorderDetail() {
         if (!commentInput.trim())
             return;
         try {
-            await axios.post("/api/comments", {
+            await api.post("/comments", {
                 borderId: id,
                 userId: user.id,
                 content: commentInput
@@ -300,7 +301,7 @@ function BorderDetail() {
         }
         if (!window.confirm("댓글을 삭제할까요?")) return;
         try {
-            await axios.delete(`/api/comments/${commentId}?userId=${user.id}`);
+            await api.delete(`/comments/${commentId}?userId=${user.id}`);
             fetchComments();
         } catch (e) {
             alert("댓글 삭제 실패");
@@ -308,7 +309,7 @@ function BorderDetail() {
     };
 
     useEffect(() => {
-        axios.get(`/api/borders/id/${id}`)
+        api.get(`/borders/id/${id}`)
         .then((res) => setBorder(res.data))
         .catch((err) => console.log("게시글 오류 : ", err))
 

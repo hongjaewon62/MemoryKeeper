@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Sigungu } from "../data/Sigungu";
 import Pagination from "react-js-pagination";
 import axios from 'axios';
+import api from "../api/axios";
 
 const Wrapper = styled.div`
     display: flex;
@@ -316,7 +317,7 @@ function Center() {
         const validName = keyword !== "" ? keyword : null;
 
         try {
-            const response = await axios.get("/api/centers/search", {
+            const response = await api.get("/centers/search", {
                 params: {
                     roadnameaddress: validAddress,
                     name: validName,

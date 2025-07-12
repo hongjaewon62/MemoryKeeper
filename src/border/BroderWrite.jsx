@@ -5,6 +5,7 @@ import InputUI from "../ui/InputUI";
 import BorderWriteEditor from "./BorderWriteEditor";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import api from "../api/axios";
 
 const Wrapper = styled.div`
     display: flex;
@@ -67,7 +68,7 @@ function BorderWrite() {
 
     useEffect(() => {
         if (id) {
-            axios.get(`/api/borders/id/${id}`)
+            api.get(`/borders/id/${id}`)
                 .then(res => {
                     setCategory(res.data.category);
                     setTitle(res.data.title);
@@ -100,7 +101,7 @@ function BorderWrite() {
         try {
             if (id) {
                 // 수정
-                await axios.put(`/api/borders/id/${id}`, {
+                await api.put(`/borders/id/${id}`, {
                     category,
                     title,
                     content,
@@ -109,7 +110,7 @@ function BorderWrite() {
                 navigate(`/borderDetail/${id}`);
             } else {
                 // 작성
-                const res = await axios.post("/api/borders", {
+                const res = await api.post("/borders", {
                     category,
                     title,
                     content,
