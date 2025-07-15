@@ -14,6 +14,10 @@
 <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white"/>
 <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=flat-square&logo=springboot&logoColor=white"/>
 
+## 배포 링크
+
+http://memorykeeper.s3-website.ap-northeast-2.amazonaws.com
+
 ## 기획 의도
 * **고령화로 치매 환자 증가**
   * 기존의 정보 제공만 하는 치매 웹사이트가 아닌 치매 환자와 가족을 위한 치료 및 예방 기능을 제공합니다
